@@ -14,28 +14,28 @@ function ServiceCard({ service, index }: { service: typeof SERVICES[0]; index: n
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="service-card group relative rounded-3xl overflow-hidden bg-white border border-slate-200/80 shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_50px_rgba(10,22,40,0.12)] transition-all duration-500 flex flex-col justify-between"
+      className="service-card group relative rounded-3xl overflow-hidden bg-white border border-slate-200/90 shadow-[0_10px_35px_rgba(0,0,0,0.06)] hover:shadow-[0_22px_55px_rgba(10,22,40,0.14)] transition-all duration-500 flex flex-col justify-between"
     >
       <div>
         {/* Image Header */}
-        <div className="relative h-60 md:h-64 overflow-hidden">
+        <div className="relative h-64 md:h-72 lg:h-80 overflow-hidden">
           <img
             src={service.image}
             alt={service.title}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
-          {/* Subtle gradient overlay to keep badges readable */}
+          {/* Subtle gradient overlay */}
           <div
             className="absolute inset-0"
             style={{
-              background: 'linear-gradient(to bottom, rgba(10,22,40,0.4) 0%, transparent 40%, rgba(10,22,40,0.2) 100%)',
+              background: 'linear-gradient(to bottom, rgba(10,22,40,0.4) 0%, transparent 40%, rgba(10,22,40,0.25) 100%)',
             }}
           />
 
           {/* Tag badge (Most Popular / Recommended) */}
           {service.tag && (
             <div
-              className="absolute top-4 right-4 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide shadow-lg"
+              className="absolute top-4 right-4 px-4 py-1.5 rounded-full text-xs font-bold tracking-wide shadow-lg"
               style={{ background: 'linear-gradient(135deg, #c9a84c, #e0c06b)', color: '#0a1628' }}
             >
               {service.tag}
@@ -44,47 +44,47 @@ function ServiceCard({ service, index }: { service: typeof SERVICES[0]; index: n
 
           {/* Duration badge */}
           <div
-            className="absolute bottom-4 left-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium shadow-md"
-            style={{ background: 'rgba(10, 22, 40, 0.75)', backdropFilter: 'blur(8px)', color: '#f5e9c8' }}
+            className="absolute bottom-4 left-4 flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold shadow-md"
+            style={{ background: 'rgba(10, 22, 40, 0.8)', backdropFilter: 'blur(8px)', color: '#f5e9c8' }}
           >
-            <Clock size={12} style={{ color: '#e0c06b' }} />
+            <Clock size={13} style={{ color: '#e0c06b' }} />
             {service.duration}
           </div>
         </div>
 
         {/* Content Body */}
-        <div className="p-6 lg:p-8">
+        <div className="p-6 sm:p-8 lg:p-9 pb-8 sm:pb-9 lg:pb-10">
           <div className="flex items-start justify-between gap-3 mb-4">
             <div
-              className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0"
+              className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
               style={{ background: 'rgba(201,168,76,0.12)', border: '1px solid rgba(201,168,76,0.25)' }}
             >
-              <service.icon size={20} style={{ color: '#b89330' }} />
+              <service.icon size={22} style={{ color: '#b89330' }} />
             </div>
 
             {/* Starting price */}
             <div className="text-right">
-              <span className="text-slate-400 text-xs uppercase tracking-wider block font-medium">from</span>
-              <span className="font-bold text-lg md:text-xl" style={{ color: '#b89330' }}>
+              <span className="text-slate-400 text-xs uppercase tracking-wider block font-semibold">from</span>
+              <span className="font-extrabold text-xl md:text-2xl" style={{ color: '#b89330' }}>
                 {service.pricing[0].price}
               </span>
             </div>
           </div>
 
-          <h3 className="font-serif text-2xl font-bold mb-2.5 transition-colors group-hover:text-[#b89330]" style={{ color: '#0a1628' }}>
+          <h3 className="font-serif text-2xl md:text-3xl font-bold mb-3 transition-colors group-hover:text-[#b89330]" style={{ color: '#0a1628' }}>
             {service.title}
           </h3>
 
-          <p className="text-slate-600 text-sm leading-relaxed mb-6 font-sans">
+          <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-6 font-sans">
             {service.description}
           </p>
 
           {/* Pricing accordion toggle */}
           <button
             onClick={() => setExpanded(!expanded)}
-            className="w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-semibold transition-all duration-200"
+            className="w-full flex items-center justify-between px-5 py-3.5 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-200"
             style={{
-              background: expanded ? 'rgba(201,168,76,0.12)' : '#f1f5f9',
+              background: expanded ? 'rgba(201,168,76,0.14)' : '#f1f5f9',
               border: `1px solid ${expanded ? 'rgba(201,168,76,0.4)' : '#e2e8f0'}`,
               color: expanded ? '#b89330' : '#1e293b',
             }}
@@ -110,32 +110,32 @@ function ServiceCard({ service, index }: { service: typeof SERVICES[0]; index: n
                   {service.pricing.map((tier, i) => (
                     <div
                       key={tier.label}
-                      className="flex items-center justify-between px-4 py-3"
+                      className="flex items-center justify-between px-4 sm:px-5 py-3.5"
                       style={{
                         background: i % 2 === 0 ? '#ffffff' : '#f8fafc',
                         borderBottom: i < service.pricing.length - 1 ? '1px solid #e2e8f0' : 'none',
                       }}
                     >
                       <div>
-                        <div className="text-slate-900 text-xs font-semibold">{tier.label}</div>
-                        <div className="text-slate-500 text-[11px]">{tier.note}</div>
+                        <div className="text-slate-900 text-xs sm:text-sm font-semibold">{tier.label}</div>
+                        <div className="text-slate-500 text-xs">{tier.note}</div>
                       </div>
-                      <div className="font-bold text-sm" style={{ color: '#b89330' }}>
+                      <div className="font-extrabold text-sm sm:text-base" style={{ color: '#b89330' }}>
                         {tier.price}
                       </div>
                     </div>
                   ))}
 
                   {/* Includes list */}
-                  <div className="p-4 border-t border-slate-200 bg-amber-500/5">
-                    <div className="text-slate-400 text-[11px] font-bold uppercase tracking-wider mb-2.5">
+                  <div className="p-4 sm:p-5 border-t border-slate-200 bg-amber-500/5">
+                    <div className="text-slate-400 text-xs font-bold uppercase tracking-wider mb-3">
                       Included in Service
                     </div>
-                    <div className="grid grid-cols-1 gap-1.5">
+                    <div className="grid grid-cols-1 gap-2">
                       {service.includes.map(item => (
-                        <div key={item} className="flex items-center gap-2">
-                          <Check size={12} style={{ color: '#b89330', flexShrink: 0 }} />
-                          <span className="text-slate-600 text-xs font-medium">{item}</span>
+                        <div key={item} className="flex items-center gap-2.5">
+                          <Check size={14} style={{ color: '#b89330', flexShrink: 0 }} />
+                          <span className="text-slate-600 text-xs sm:text-sm font-medium">{item}</span>
                         </div>
                       ))}
                     </div>
@@ -145,18 +145,6 @@ function ServiceCard({ service, index }: { service: typeof SERVICES[0]; index: n
             )}
           </AnimatePresence>
         </div>
-      </div>
-
-      {/* Card Footer Link */}
-      <div className="px-6 lg:px-8 pb-6 lg:pb-8 pt-2">
-        <a
-          href="#contact"
-          className="inline-flex items-center gap-2 text-sm font-semibold transition-all duration-200 group-hover:translate-x-1"
-          style={{ color: '#b89330' }}
-        >
-          Book This Service
-          <ArrowRight size={14} />
-        </a>
       </div>
     </motion.div>
   );
@@ -168,8 +156,9 @@ export default function Services() {
 
   return (
     <section id="services" className="py-24 md:py-32 relative bg-white border-b border-slate-100">
-      {/* Container with wider max width and reduced side padding */}
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-10 lg:px-12">
+      {/* Container with ultra-wide span and minimal margins to fill horizontal space */}
+      <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
+        
         {/* Header */}
         <motion.div
           ref={titleRef}
@@ -195,8 +184,8 @@ export default function Services() {
           </p>
         </motion.div>
 
-        {/* 3-Column Wide Grid with spacious gaps */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+        {/* 3-Column Wide Grid with spacious layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 xl:gap-10">
           {SERVICES.map((service, i) => (
             <ServiceCard key={service.id} service={service} index={i} />
           ))}
@@ -222,7 +211,7 @@ export default function Services() {
         >
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 px-9 py-4.5 rounded-full font-semibold text-base transition-all duration-300 hover:scale-105 shadow-lg"
+            className="inline-flex items-center gap-2 px-9 py-4.5 rounded-full font-bold text-base transition-all duration-300 hover:scale-105 shadow-xl"
             style={{
               background: 'linear-gradient(135deg, #c9a84c, #e0c06b)',
               color: '#0a1628',
